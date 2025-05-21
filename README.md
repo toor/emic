@@ -12,13 +12,15 @@ The data analysis scripts also require you to have the following Python packages
 * `matplotlib`
 * `pandas`
 * `numba`
+
 Each of these packages can be installed into the `conda` environment at the same time as you install Snakemake.
 
-To generate the data, first compile the binary:
+The first step is to compile the binary:
 `gcc -o main main.c`
 
-To run the Snakemake workflow, first replace `SIM_NAME` in the rules `all`, `run`, and `analyse_data`with the desired name of your output directory. Then, perform a Snakemake dry run using `snakemake -n`. This command tells you the number of jobs that Snakemake needs to run to generate these data. To reproduce the data presented in the study, a large number of jobs need to be run, and we therefore recommend that you use a university cluster or other software which can automatically manage and schedule many jobs simultaneously. Snakemake integrates well with a variety of such software; for details, see: https://snakemake.readthedocs.io/en/stable/getting_started/migration.html and https://stackoverflow.com/questions/77929511/how-to-run-snakemake-8-on-a-slurm-cluster for use with Snakemake versions >= 8.0.
+Next, to run the Snakemake workflow, first replace `SIM_NAME` in the rules `all`, `run`, and `analyse_data`with the desired name of your output directory. Then, perform a Snakemake dry run using `snakemake -n`. This command tells you the number of jobs that Snakemake needs to run to generate these data.
+To reproduce the data presented in the study, a large number of jobs need to be run, and we therefore recommend that you use a cluster which software which can remotely run many jobs simultaneously. Snakemake integrates well with a variety of such software; for details, see: https://snakemake.readthedocs.io/en/stable/getting_started/migration.html and https://stackoverflow.com/questions/77929511/how-to-run-snakemake-8-on-a-slurm-cluster for use with Snakemake versions >= 8.0.
 
-As it is setup at the moment, the Snakefile will generate data for small systems with a few interface spins, and plots the calculating entropy difference between parallel and antiparallel configurations of the macroscopic magnets for different values of N_y as a function of N_x (Figure 3 in the manuscript). `analyse_data.py` can also be modified to generate curves depicting magnetisation as a function of interfacial coupling strength J_R for all combinations of N_y and N_x.
+As it is setup at the moment, the Snakefile will generate data for small systems with a few interface spins, and plots the calculating entropy difference between parallel and antiparallel configurations of the macroscopic magnets for different values of $N_y$ as a function of $N_x$ (Figure 3 in the manuscript). `analyse_data.py` can also be modified to generate curves depicting magnetisation as a function of interfacial coupling strength $J_R$ for all combinations of $N_y$ and $N_x$.
 
 For further information and/or clarification on the use of this software, please contact William Huddie (w.j.huddie@uu.nl)
