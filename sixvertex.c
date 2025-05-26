@@ -29,7 +29,7 @@ int state_table[6][4][2][2] = {{{{ 3 , 1 },{ 5 , 2 },},{{ 3 , 0 },{ 4 , 3 },},{{
                                {{{ 0 , 2 },{ 2 , 3 },},{{ 3 , 2 },{ 1 , 3 },},{{ 0 , 0 },{ 3 , 1 },},{{ 2 , 0 },{ 1 , 1 },},},
 };
 
-int seed = 122;
+//int seed = 122;
 
 int state_arrows[6][4] = {
     {RIGHT, RIGHT, UP, UP},
@@ -254,7 +254,9 @@ double calculate_total_energy(struct vertex *vertices, double betaJ, int N) {
   return E / N;
 }
 
-
+// This is the quantity that we are interested in;
+// integrated over values of the coupling it gives the free energy 
+// of the system.
 double calculate_interface_magnetisation(struct vertex *vertices, int N) {
   double m = 0.0;
   
@@ -270,6 +272,8 @@ double calculate_interface_magnetisation(struct vertex *vertices, int N) {
   return m / N;
 }
 
+// The vertex density is a good metric for the equilibration of the 
+// six vertex model - see Newman & Barkema: Monte Carlo Methods in Statistical Physics
 double calculate_vertex_density(struct vertex *vertices, int N) {
   int rho = 0;
 
@@ -479,6 +483,12 @@ int main(int argc, char *argv[]) {
   srand(time(0));
   int r = rand();
   init_genrand(r);
+  
+  FILE *seed_file = fopen("seed.txt", "w");
+  fprintf(seed_file, "SEED USED:\n");
+  fprintf(seed_file, "%d", r);
+  fclose(seed_file);
+
 
   char *outfile = argv[4];
   char *equ_file = argv[5]; 
