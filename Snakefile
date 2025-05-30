@@ -25,9 +25,10 @@ rule all:
 
 rule run:
   output: "results/SIM_NAME/N_y={y}/N_x={x}/betaJ={betaJ}/rep{r}/data.csv",
-          "results/SIM_NAME/N_y={y}/N_x={x}/betaJ={betaJ}/rep{r}/equ_lattice.vertex"
+          "results/SIM_NAME/N_y={y}/N_x={x}/betaJ={betaJ}/rep{r}/equ_lattice.vertex",
+          "results/SIM_NAME/N_y={y}/N_x={x}/betaJ={betaJ}/rep{r}/seed.txt"
   params: in_file = "none"
-  shell: "./main {wildcards.betaJ} {wildcards.x} {wildcards.y} {output[0]} {output[1]} 'none'" 
+  shell: "./main {wildcards.betaJ} {wildcards.x} {wildcards.y} {output[0]} {output[1]} {output[2]}" 
 
 rule analyse_data:
   output: "figs/SIM_NAME/entropy_vs_Nx.pdf"

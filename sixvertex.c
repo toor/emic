@@ -470,7 +470,7 @@ int main(int argc, char *argv[]) {
     printf("N_y: Number of sites in y direction.\n");
     printf("outfile: File to write output to.\n");
     printf("equ_file: File that the final (equilibrated) state of the system will be written to.\n");
-    printf("state_file: File that the total visited state of the system should be written to\n");
+    printf("seed_file: File that the RNG seed used by this simulation is \n");
     return -1;
   }
   
@@ -480,19 +480,19 @@ int main(int argc, char *argv[]) {
   int Ny = strtol(argv[3], NULL, 10);
   int N = Nx * Ny;
   
+  // Initialise random number generator.
   srand(time(0));
   int r = rand();
-  init_genrand(r);
-  
-  FILE *seed_file = fopen("seed.txt", "w");
-  fprintf(seed_file, "SEED USED:\n");
-  fprintf(seed_file, "%d", r);
-  fclose(seed_file);
-
+  init_genrand(r); 
 
   char *outfile = argv[4];
   char *equ_file = argv[5]; 
-  char *state_file = argv[6];
+  char *seed_file = argv[6];
+ 
+  FILE *seed_fptr = fopen(seed_file, "w");
+  fprintf(seed_fptr, "SEED USED:\n");
+  fprintf(seed_fptr, "%d", r);
+  fclose(seed_fptr);
   
   printf("six_vertex: Using below parameters\n");
   printf("betaJ: %f\n", betaJ);
