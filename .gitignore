@@ -1,1 +1,5 @@
 sixvertex
+.snakemake/*
+*.tar.gz
+results/*
+figs/*

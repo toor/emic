@@ -2,7 +2,7 @@ import numpy as np
 import scipy as sp 
 import matplotlib.pyplot as plt 
 import pandas as pd 
-from numba import jit
+#from numba import jit
 import matplotlib as mpl
 import matplotlib.colors as colours
 import sys
@@ -74,8 +74,8 @@ class Data:
         for i, n_x in enumerate(n_x_vals):
             #print(f"N_x = {n_x}")
             total_spins = n_x * n_y 
-            s_vals = np.zeros((betaJ_vals.size,2), dtype=np.float64)
-            for j, betaJ in enumerate(betaJ_vals):
+            s_vals = np.zeros((self.betaJ_vals.size,2), dtype=np.float64)
+            for j, betaJ in enumerate(self.betaJ_vals):
                 avg_mags = np.zeros((self.reps.size, 2))
                 for k, rep in enumerate(reps):
                     filename = 'results/' + self.prefix + f'/N_y={n_y}/N_x={n_x}/betaJ={betaJ:.1f}/rep{rep}/data.csv'
@@ -281,7 +281,7 @@ class Data:
                     plt.close()
 
 def generate_parameters(p):
-    return int(p.min_y), int(p.max_y), int(p.y_step), int(p.max_x), int(p.x_step), str(p.prefix), float(p.Jmax), float(p.Jstep), int(reps)
+    return int(p.min_y), int(p.max_y), int(p.y_step), int(p.max_x), int(p.x_step), str(p.prefix), float(p.Jmax), float(p.Jstep), int(p.reps)
 
 def generate_couplings(Jmax, Jstep):
     couplings = np.arange(-Jmax, Jmax + Jstep, Jstep)

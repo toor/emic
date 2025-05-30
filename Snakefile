@@ -20,18 +20,18 @@ combinations = [(x, y) for y in y_positions for x in generate_x_positions(y, max
 
 rule all:
   input: 
-         expand("results/SIM_NAME/N_y={y}/N_x={x}/betaJ={betaJ:.1f}/rep{r}/data.csv", y=[y for x, y in combinations], x=[x for x,y in combinations], betaJ=betaJ_vals, r=reps),
-         "figs/SIM_NAME/entropy_vs_Nx.pdf"
+         #expand("results/SIM_NAME/N_y={y}/N_x={x}/betaJ={betaJ:.1f}/rep{r}/data.csv", y=[y for x, y in combinations], x=[x for x,y in combinations], betaJ=betaJ_vals, r=reps),
+         "figs/SIM_241021_0001/entropy_vs_Nx.pdf"
 
 rule run:
-  output: "results/SIM_NAME/N_y={y}/N_x={x}/betaJ={betaJ}/rep{r}/data.csv",
-          "results/SIM_NAME/N_y={y}/N_x={x}/betaJ={betaJ}/rep{r}/equ_lattice.vertex",
-          "results/SIM_NAME/N_y={y}/N_x={x}/betaJ={betaJ}/rep{r}/seed.txt"
+  output: "results/SIM_241021_0001/N_y={y}/N_x={x}/betaJ={betaJ}/rep{r}/data.csv",
+          "results/SIM_241021_0001/N_y={y}/N_x={x}/betaJ={betaJ}/rep{r}/equ_lattice.vertex",
+          "results/SIM_241021_0001/N_y={y}/N_x={x}/betaJ={betaJ}/rep{r}/seed.txt"
   params: in_file = "none"
   shell: "./main {wildcards.betaJ} {wildcards.x} {wildcards.y} {output[0]} {output[1]} {output[2]}" 
 
 rule analyse_data:
-  output: "figs/SIM_NAME/entropy_vs_Nx.pdf"
+  output: "figs/SIM_241021_0001/entropy_vs_Nx.pdf"
   params: min_y = np.min(y_positions),
           max_y = np.max(y_positions),
           y_step = 1,
